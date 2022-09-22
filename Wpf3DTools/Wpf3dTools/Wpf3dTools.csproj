@@ -6,9 +6,4 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Implementation\" />
-    <Folder Include="Factories\" />
-  </ItemGroup>
-
 </Project>
