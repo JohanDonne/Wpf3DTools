@@ -2,6 +2,7 @@
 using System.Windows;
 using Wpf3dDemo.LogicLayer;
 using Wpf3dDemo.PresentationLayer;
+using Wpf3dTools;
 
 namespace Wpf3dDemo;
 /// <summary>
@@ -20,6 +21,7 @@ public partial class App : System.Windows.Application
 
     private static void ConfigureServices(ServiceCollection services)
     {
+        services.AddWpf3dServices();
         services.AddLogicServices();
         services.AddPresentationServices();
     }

@@ -7,6 +7,6 @@ public static class ServiceExtensions
 {
     public static void AddLogicServices(this ServiceCollection services)
     {
-        services.AddTransient<ILogic, Logic>();
+        services.AddTransient<IWorld, World>();
     }
 }
