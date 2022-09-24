@@ -13,6 +13,8 @@ internal class World : IWorld
 
     public List<IItem3D> Items { get; } = new();
 
+    public Snowman Snowman { get; private set; }
+
     public World()
     {
         Bounds = (new Point3D(-_worldSize / 2, -_worldSize / 2, -_worldSize / 2),
@@ -30,6 +32,7 @@ internal class World : IWorld
         Items.Add(new Cone( position: new(650,50, -50), radius: 40, axis: new(0, 150, 100)));
         Items.Add(new Parallelogram( origin: new (-50,100,0),side1: new(-80,0,50), new(0,100,-20)));
         Items.Add(new Circle(center: new Point3D(-250,100,0 ), radius: 50, normal: new(0,1,1)));
+        Snowman = new Snowman(position: new(-500, 0, 0),1);
     }
 }
 
