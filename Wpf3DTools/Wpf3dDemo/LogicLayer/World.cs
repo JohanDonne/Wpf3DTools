@@ -25,8 +25,9 @@ internal class World : IWorld
     {
         Items.Add(new Cube { Position = new(100,100,0), Size=100});
         Items.Add(new Sphere { Position = new Point3D(250,100,0), Radius = 50 });
-        Items.Add(new Beam { Position = new Point3D(350,100,50), XSize = 50, YSize = 80, ZSize = 200});
+        Items.Add(new Beam { Position = new Point3D(350,75,50), XSize = 50, YSize = 80, ZSize = 200});
         Items.Add(new Cylinder { Position = new Point3D(500, 50, 50), Radius = 30, Axis = new Vector3D(0, 150, -100) });
+        Items.Add(new Cone { Position = new Point3D(650,50, -50), Radius = 40, Axis = new Vector3D(0, 150, 100) });
     }
 }
 

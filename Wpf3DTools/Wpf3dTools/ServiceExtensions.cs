@@ -14,6 +14,7 @@ public static class ServiceExtensions
         services.AddSingleton<IBeamFactory, BeamFactory>();
         services.AddSingleton<ISphereFactory, SphereFactory>();
         services.AddSingleton<ICylinderFactory, CylinderFactory>();
+        services.AddSingleton<IConeFactory, ConeFactory>();
         services.AddSingleton<ILineFactory, LineFactory>();
     }
 }

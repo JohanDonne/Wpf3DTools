@@ -23,7 +23,7 @@ public class CubeFactory : ICubeFactory
         return geo;
     }
 
-    public static void AddCubeToMesh(MeshGeometry3D mesh, Point3D center, double xSize, double ySize, double zSize)
+    public void AddCubeToMesh(MeshGeometry3D mesh, Point3D center, double xSize, double ySize, double zSize)
     {
         Point3D[] points =
                 {

@@ -25,7 +25,7 @@ public class SphereFactory : ISphereFactory
     }
 
     // Add a sphere to an existing MeshGeometry3D
-    public static void AddSphereToMesh(MeshGeometry3D mesh, Point3D center, double radius, int numTheta, int numPhi)
+    public void AddSphereToMesh(MeshGeometry3D mesh, Point3D center, double radius, int numTheta = 72, int numPhi = 72)
     {
         // Make a point dictionary if needed.
         var pointDict = new Dictionary<Point3D, int>();

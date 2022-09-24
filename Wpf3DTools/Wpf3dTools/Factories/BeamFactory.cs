@@ -15,7 +15,7 @@ public class BeamFactory : IBeamFactory
         return geo;
     }
 
-    public static void AddBeamToMesh(MeshGeometry3D mesh, Point3D origin, double xSize, double ySize, double zSize)
+    public void AddBeamToMesh(MeshGeometry3D mesh, Point3D origin, double xSize, double ySize, double zSize)
     {
         Point3D[] points =
                 {
