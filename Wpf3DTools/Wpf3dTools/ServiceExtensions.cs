@@ -11,6 +11,7 @@ public static class ServiceExtensions
     {
         services.AddTransient<ISphericalCameraController, SphericalCameraController>();
         services.AddSingleton<ICubeFactory, CubeFactory>();
+        services.AddSingleton<IBeamFactory, BeamFactory>();
         services.AddSingleton<ISphereFactory, SphereFactory>();
         services.AddSingleton<ILineFactory, LineFactory>();
     }

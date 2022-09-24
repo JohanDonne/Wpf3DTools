@@ -13,6 +13,7 @@ public class MainViewModel
     private readonly ISphericalCameraController _cameraController;
     private readonly ILineFactory _lineFactory;
     private readonly ICubeFactory _cubeFactory;
+    private readonly IBeamFactory _beamFactory;
     private readonly ISphereFactory _sphereFactory;
     private readonly SolidColorBrush[] _colorBrushList = new SolidColorBrush[]
        {
@@ -65,7 +66,8 @@ public class MainViewModel
             ISphericalCameraController cameraController,
             ILineFactory lineFactory,
             ICubeFactory cubeFactory,
-            ISphereFactory sphereFactory
+            ISphereFactory sphereFactory,
+            IBeamFactory beamFactory
         )
     {
         _world = world;
@@ -73,10 +75,11 @@ public class MainViewModel
         _lineFactory = lineFactory;
         _cubeFactory = cubeFactory;
         _sphereFactory = sphereFactory;
+        _beamFactory = beamFactory;
 
         Init3DPresentation();
         InitItemGeometries();
-        UpdateWorldDisplay();       
+        UpdateWorldDisplay();
     }
 
     private void UpdateWorldDisplay()
@@ -100,6 +103,7 @@ public class MainViewModel
             {
                 Cube => _cubeFactory.Create(GetMaterial(0)),
                 Sphere => _sphereFactory.Create(GetMaterial(1)),
+                Beam beam => _beamFactory.Create(_world.Origin, beam.XSize, beam.YSize, beam.ZSize, GetMaterial(2)),
                 _ => throw new ArgumentException("Unknown type of a item"),
             };
             _itemsList.Add(geometry);
