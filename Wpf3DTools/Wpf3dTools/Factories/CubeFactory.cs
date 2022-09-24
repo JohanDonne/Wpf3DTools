@@ -8,12 +8,12 @@ using Wpf3dTools.Implementation;
 using Wpf3dTools.Interfaces;
 
 namespace Wpf3dTools.Factories;
-public class CubeFactory:ICubeFactory
+public class CubeFactory : ICubeFactory
 {
     public GeometryModel3D Create(MaterialGroup materials)
     {
         var mesh = new MeshGeometry3D();
-        AddCube(mesh,new Point3D(), 1.0, 1.0, 1.0);
+        AddCubeToMesh(mesh, new Point3D(), 1.0, 1.0, 1.0);
         var geo = new GeometryModel3D(mesh, materials);
         return geo;
     }
@@ -21,12 +21,12 @@ public class CubeFactory:ICubeFactory
     public GeometryModel3D Create(Point3D center, double xSize, double ySize, double zSize, MaterialGroup materials)
     {
         var mesh = new MeshGeometry3D();
-        AddCube(mesh, center, xSize, ySize, zSize);
+        AddCubeToMesh(mesh, center, xSize, ySize, zSize);
         var geo = new GeometryModel3D(mesh, materials);
         return geo;
     }
 
-    public static void AddCube(MeshGeometry3D mesh, Point3D center, double xSize, double ySize, double zSize)
+    public static void AddCubeToMesh(MeshGeometry3D mesh, Point3D center, double xSize, double ySize, double zSize)
     {
         Point3D[] points =
                 {

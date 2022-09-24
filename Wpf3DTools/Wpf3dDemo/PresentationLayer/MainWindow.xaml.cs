@@ -20,7 +20,6 @@ public partial class MainWindow : Window
 
     #region camera control
 
-
     private void WindowKeyDown(object sender, KeyEventArgs e)
     {
         _viewModel.ProcessKey(e.Key);
@@ -30,7 +29,6 @@ public partial class MainWindow : Window
     {
         _viewModel.Zoom(e.Delta);
     }
-
 
     private void ViewPortMouseDown(object sender, MouseButtonEventArgs e)
     {
