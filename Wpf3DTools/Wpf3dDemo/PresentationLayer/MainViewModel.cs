@@ -11,13 +11,8 @@ public class MainViewModel
 {
     private readonly IWorld _world;
     private readonly ISphericalCameraController _cameraController;
-    private readonly ILineFactory _lineFactory;
-    private readonly ICubeFactory _cubeFactory;
-    private readonly IBeamFactory _beamFactory;
-    private readonly ISphereFactory _sphereFactory;
-    private readonly ICylinderFactory _cylinderFactory;
-    private readonly IConeFactory _coneFactory;
-    private readonly IPolygonFactory _polygonFactory;
+    private readonly IShapesFactory _shapesFactory;
+    
     private readonly SolidColorBrush[] _colorBrushList = new SolidColorBrush[]
        {
             new SolidColorBrush(Colors.MediumBlue),
@@ -63,29 +58,12 @@ public class MainViewModel
         }
     }
 
-    public MainViewModel
-        (
-            IWorld world,
-            ISphericalCameraController cameraController,
-            ILineFactory lineFactory,
-            ICubeFactory cubeFactory,
-            ISphereFactory sphereFactory,
-            IBeamFactory beamFactory,
-            ICylinderFactory cylinderFactory,
-            IConeFactory coneFactory,
-            IPolygonFactory polygonFactory
-        )
+    public MainViewModel(IWorld world, ISphericalCameraController cameraController, IShapesFactory shapesFactory)
     {
         _world = world;
         _cameraController = cameraController;
-        _lineFactory = lineFactory;
-        _cubeFactory = cubeFactory;
-        _sphereFactory = sphereFactory;
-        _beamFactory = beamFactory;
-        _cylinderFactory = cylinderFactory;
-        _coneFactory = coneFactory;
-        _polygonFactory = polygonFactory;
-
+        _shapesFactory = shapesFactory;
+        
         Init3DPresentation();
         InitItemGeometries();
         UpdateWorldDisplay();
@@ -110,15 +88,15 @@ public class MainViewModel
         {
             var geometry = item switch
             {
-                Cube => _cubeFactory.Create(GetMaterial(0)),
-                Sphere => _sphereFactory.Create(GetMaterial(1)),
-                Beam beam => _beamFactory.Create(beam.XSize, beam.YSize, beam.ZSize, GetMaterial(2)),
-                Cylinder cyl => _cylinderFactory.Create(cyl.Radius, cyl.Axis, GetMaterial(3)),
-                Cone cone => _coneFactory.Create(cone.Radius, cone.Axis, GetMaterial(4)),
+                Cube => _shapesFactory.CreateCube(GetMaterial(0)),
+                Sphere => _shapesFactory.CreateSphere(GetMaterial(1)),
+                Beam beam => _shapesFactory.CreateBeam(beam.XSize, beam.YSize, beam.ZSize, GetMaterial(2)),
+                Cylinder cyl => _shapesFactory.CreateCylinder(cyl.Radius, cyl.Axis, GetMaterial(3)),
+                Cone cone => _shapesFactory.CreateCone(cone.Radius, cone.Axis, GetMaterial(4)),
                 // add rectangles with backface culling (no backMaterials parameter used)
-                Parallelogram rect => _polygonFactory.CreateParallelogram(rect.Side1, rect.Side2, GetMaterial(5)),
+                Parallelogram rect => _shapesFactory.CreateParallelogram(rect.Side1, rect.Side2, GetMaterial(5)),
                 // show circles without backface culling (by providing a backMaterials parameter).
-                Circle circle => _polygonFactory.CreateCircle(normal:  circle.Normal, materials: GetMaterial(6), backMaterials: GetMaterial(7)),
+                Circle circle => _shapesFactory.CreateCircle(normal:  circle.Normal, materials: GetMaterial(6), backMaterials: GetMaterial(7)),
                 _ => throw new ArgumentException("Unknown type of a item"),
                 };
             _itemsList.Add(geometry);
@@ -148,9 +126,9 @@ public class MainViewModel
         double yLength = Math.Abs(_world.Bounds.p2.Y - _world.Bounds.p1.Y) / 2;
         double zLength = Math.Abs(_world.Bounds.p2.Z - _world.Bounds.p1.Z) / 2;
         double thickness = (_world.Bounds.p2 - _world.Bounds.p1).Length / 500;
-        _axesGroup.Children.Add(_lineFactory.CreateLine(new Point3D(xLength, 0, 0), new Point3D(0, 0, 0), thickness, Brushes.Red));
-        _axesGroup.Children.Add(_lineFactory.CreateLine(new Point3D(0, yLength, 0), new Point3D(0, 0, 0), thickness, Brushes.Green));
-        _axesGroup.Children.Add(_lineFactory.CreateLine(new Point3D(0, 0, zLength), new Point3D(0, 0, 0), thickness, Brushes.Blue));
+        _axesGroup.Children.Add(_shapesFactory.CreateLine(new Point3D(xLength, 0, 0), new Point3D(0, 0, 0), thickness, Brushes.Red));
+        _axesGroup.Children.Add(_shapesFactory.CreateLine(new Point3D(0, yLength, 0), new Point3D(0, 0, 0), thickness, Brushes.Green));
+        _axesGroup.Children.Add(_shapesFactory.CreateLine(new Point3D(0, 0, zLength), new Point3D(0, 0, 0), thickness, Brushes.Blue));
         _axesGroup.Freeze();
     }
 

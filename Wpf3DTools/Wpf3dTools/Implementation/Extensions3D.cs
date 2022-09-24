@@ -15,16 +15,7 @@ public static class Extensions3D
         double z = Math.Round(point.Z, decimals);
         return new Point3D(x, y, z);
     }
-
-    public static Point3D SpherePoint(Point3D center, double r, double theta, double phi)
-    {
-        double y = r * Math.Cos(phi);
-        double h = r * Math.Sin(phi);
-        double x = h * Math.Sin(theta);
-        double z = h * Math.Cos(theta);
-        return center + new Vector3D(x, y, z);
-    }
-
+    
     // Find the intersection of a plane and a line.
     // The line is given by point linePt and vector v.
     // The plane is given by point planePt and normal vector n.
