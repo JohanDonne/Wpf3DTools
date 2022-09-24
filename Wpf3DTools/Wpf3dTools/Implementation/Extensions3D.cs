@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Media3D;
 
 namespace Wpf3dTools.Implementation;
 public static class Extensions3D
 {
+    #region general utils
+
     public static Point3D Round(this Point3D point, int decimals = 3)
     {
         double x = Math.Round(point.X, decimals);
@@ -25,6 +24,31 @@ public static class Extensions3D
         double z = h * Math.Cos(theta);
         return center + new Vector3D(x, y, z);
     }
+
+    // Find the intersection of a plane and a line.
+    // The line is given by point linePt and vector v.
+    // The plane is given by point planePt and normal vector n.
+    public static Point3D IntersectPlaneLine(Point3D linePt, Vector3D v,
+        Point3D planePt, Vector3D n)
+    {
+        // Get the equation for the plane.
+        // For information on getting the plane equation, see:
+        // http://www.songho.ca/math/plane/plane.html
+        double A = n.X;
+        double B = n.Y;
+        double C = n.Z;
+        double D = -((A * planePt.X) + (B * planePt.Y) + (C * planePt.Z));
+
+        // Find the intersection parameter t.
+        // For information on finding the intersection, see:
+        // http://www.ambrsoft.com/TrigoCalc/Plan3D/PlaneLineIntersection_.htm
+        double t = -((A * linePt.X) + (B * linePt.Y) + (C * linePt.Z) + D) /
+            ((A * v.X) + (B * v.Y) + (C * v.Z));
+
+        // Find the point of intersection.
+        return linePt + (t * v);
+    }
+    #endregion general utils
 
     #region PointSharing
 
@@ -164,5 +188,4 @@ public static class Extensions3D
     }
 
     #endregion Polygon
-
 }

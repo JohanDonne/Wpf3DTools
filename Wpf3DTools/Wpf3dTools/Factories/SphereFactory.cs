@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Media.Media3D;
-using System;
 using Wpf3dTools.Implementation;
 using Wpf3dTools.Interfaces;
 

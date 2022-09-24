@@ -13,6 +13,7 @@ public static class ServiceExtensions
         services.AddSingleton<ICubeFactory, CubeFactory>();
         services.AddSingleton<IBeamFactory, BeamFactory>();
         services.AddSingleton<ISphereFactory, SphereFactory>();
+        services.AddSingleton<ICylinderFactory, CylinderFactory>();
         services.AddSingleton<ILineFactory, LineFactory>();
     }
 }
