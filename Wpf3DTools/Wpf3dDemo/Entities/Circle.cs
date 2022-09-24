@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Media.Media3D;
 
 namespace Wpf3dDemo.Entities;
-public record struct Cone: IItem3D
+public record struct Circle : IItem3D
 {
     public Point3D Position { get; set; }
 
@@ -14,13 +14,12 @@ public record struct Cone: IItem3D
 
     public double Radius { get; }
 
-    public Vector3D Axis { get; }
+    public Vector3D Normal { get; }
 
-    public Cone(Point3D position, double radius, Vector3D axis, double scale = 1)
+    public Circle(Point3D center, double radius, Vector3D normal)
     {
-        Position = position;
-        Radius = radius;
-        Axis = axis;
-        Scale = scale;
+        Position = center;
+        Normal = normal;
+        Scale = Radius = radius;
     }
 }

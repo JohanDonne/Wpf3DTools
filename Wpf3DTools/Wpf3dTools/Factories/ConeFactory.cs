@@ -8,10 +8,10 @@ namespace Wpf3dTools.Factories;
 public class ConeFactory : IConeFactory
 {
     // Create a Cone defined by a centerpoint, radius and axis
-    public GeometryModel3D Create(Point3D origin, double radius, Vector3D axis, MaterialGroup materials, int numSides = 72, bool smoothSides = true)
+    public GeometryModel3D Create(double radius, Vector3D axis, MaterialGroup materials, int numSides = 72, bool smoothSides = true)
     {
         var mesh = new MeshGeometry3D();
-        AddConeToMesh(mesh, origin, radius, axis, numSides, smoothSides);
+        AddConeToMesh(mesh,new Point3D(), radius, axis, numSides, smoothSides);
         var geo = new GeometryModel3D(mesh, materials);
         return geo;
     }

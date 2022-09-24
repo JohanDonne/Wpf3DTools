@@ -17,6 +17,7 @@ public class MainViewModel
     private readonly ISphereFactory _sphereFactory;
     private readonly ICylinderFactory _cylinderFactory;
     private readonly IConeFactory _coneFactory;
+    private readonly IPolygonFactory _polygonFactory;
     private readonly SolidColorBrush[] _colorBrushList = new SolidColorBrush[]
        {
             new SolidColorBrush(Colors.MediumBlue),
@@ -71,7 +72,9 @@ public class MainViewModel
             ISphereFactory sphereFactory,
             IBeamFactory beamFactory,
             ICylinderFactory cylinderFactory,
-            IConeFactory coneFactory)
+            IConeFactory coneFactory,
+            IPolygonFactory polygonFactory
+        )
     {
         _world = world;
         _cameraController = cameraController;
@@ -81,6 +84,7 @@ public class MainViewModel
         _beamFactory = beamFactory;
         _cylinderFactory = cylinderFactory;
         _coneFactory = coneFactory;
+        _polygonFactory = polygonFactory;
 
         Init3DPresentation();
         InitItemGeometries();
@@ -108,11 +112,15 @@ public class MainViewModel
             {
                 Cube => _cubeFactory.Create(GetMaterial(0)),
                 Sphere => _sphereFactory.Create(GetMaterial(1)),
-                Beam beam => _beamFactory.Create(_world.Origin, beam.XSize, beam.YSize, beam.ZSize, GetMaterial(2)),
-                Cylinder cyl => _cylinderFactory.Create(_world.Origin, cyl.Radius, cyl.Axis, GetMaterial(3)),
-                Cone cone => _coneFactory.Create(_world.Origin, cone.Radius, cone.Axis, GetMaterial(4)),
+                Beam beam => _beamFactory.Create(beam.XSize, beam.YSize, beam.ZSize, GetMaterial(2)),
+                Cylinder cyl => _cylinderFactory.Create(cyl.Radius, cyl.Axis, GetMaterial(3)),
+                Cone cone => _coneFactory.Create(cone.Radius, cone.Axis, GetMaterial(4)),
+                // add rectangles with backface culling (no backMaterials parameter used)
+                Parallelogram rect => _polygonFactory.CreateParallelogram(rect.Side1, rect.Side2, GetMaterial(5)),
+                // show circles without backface culling (by providing a backMaterials parameter).
+                Circle circle => _polygonFactory.CreateCircle(normal:  circle.Normal, materials: GetMaterial(6), backMaterials: GetMaterial(7)),
                 _ => throw new ArgumentException("Unknown type of a item"),
-            };
+                };
             _itemsList.Add(geometry);
             _itemsGroup.Children.Add(geometry);
         }

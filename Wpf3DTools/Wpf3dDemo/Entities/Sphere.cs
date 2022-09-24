@@ -10,5 +10,10 @@ public record struct Sphere : IItem3D
 {
     public Point3D Position { get; set; }
     public double Scale => Radius;
-    public double Radius { get; set; }
+    public double Radius { get; init; }
+    public Sphere(Point3D position, double radius)
+    {
+        Position = position;
+        Radius = radius;
+    }
 }

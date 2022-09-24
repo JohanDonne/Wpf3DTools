@@ -7,10 +7,10 @@ using Wpf3dTools.Interfaces;
 namespace Wpf3dTools.Factories;
 public class BeamFactory : IBeamFactory
 {
-    public GeometryModel3D Create(Point3D origin, double xSize, double ySize, double zSize, MaterialGroup materials)
+    public GeometryModel3D Create(double xSize, double ySize, double zSize, MaterialGroup materials)
     {
         var mesh = new MeshGeometry3D();
-        AddBeamToMesh(mesh, origin, xSize, ySize, zSize);
+        AddBeamToMesh(mesh, new Point3D(), xSize, ySize, zSize);
         var geo = new GeometryModel3D(mesh, materials);
         return geo;
     }

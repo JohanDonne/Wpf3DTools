@@ -10,5 +10,11 @@ public record struct Cube : IItem3D
 {
     public Point3D Position { get ; set ; }
     public double Scale => Size;
-    public double Size { get ; set ; }  
+    public double Size { get ;}
+
+    public Cube(Point3D position, double size)
+    {
+        Position = position;
+        Size = size;
+    }
 }
