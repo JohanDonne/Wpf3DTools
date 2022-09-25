@@ -11,4 +11,6 @@ public interface IItem3D
     public Point3D  Position { get; }
 
     public double Scale { get;  }
+
+    public double YRotation { get; }
 }

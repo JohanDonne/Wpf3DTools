@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using System.Windows.Media.Media3D;
 
 namespace Wpf3dDemo.Entities;
-public record struct Parallelogram : IItem3D
+public record class Parallelogram : IItem3D
 {
     public Point3D Position { get; set; }
 
-    public double Scale { get; set; } 
+    public double Scale { get; set; }
+
+    public double YRotation { get; set; } = 0;
 
     public Vector3D Side1 { get; }
     public Vector3D Side2 { get; }

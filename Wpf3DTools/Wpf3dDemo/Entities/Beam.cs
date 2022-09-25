@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using System.Windows.Media.Media3D;
 
 namespace Wpf3dDemo.Entities;
-public record struct Beam: IItem3D
+public record class Beam: IItem3D
 {
     public Point3D Position { get;set; }
     public double Scale { get; set; } 
     public double XSize { get; }
     public double YSize { get; }
     public double ZSize { get; }
+    public double YRotation => 0;
 
     public Beam(Point3D position, double xSize, double ySize, double zSize, double scale = 1) 
     {

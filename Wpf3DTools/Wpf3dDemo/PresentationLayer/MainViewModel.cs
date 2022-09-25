@@ -36,6 +36,7 @@ public class MainViewModel
     private readonly Model3DGroup _axesGroup = new();
     private readonly Model3DGroup _itemsGroup = new();
     private readonly Model3DGroup _snowmanGroup = new();
+    private readonly PeriodicTimer _timer = new(TimeSpan.FromMilliseconds(10));
     private bool _showAxes;
 
     public ProjectionCamera Camera => _cameraController.Camera;
@@ -69,7 +70,16 @@ public class MainViewModel
         
         Init3DPresentation();
         InitItemGeometries();
-        UpdateWorldDisplay();
+        _ = Animate();
+    }
+
+    public async Task Animate()
+    {
+        while (true)
+        {
+            UpdateWorldDisplay();
+            await _timer.WaitForNextTickAsync();
+        }
     }
 
     private void UpdateWorldDisplay()
@@ -77,11 +87,13 @@ public class MainViewModel
         for (int i = 0; i < _itemsList.Count; i++)
         {
             var itemTransform = new Transform3DGroup();
+            itemTransform.Children.Add(new RotateTransform3D(new AxisAngleRotation3D(new Vector3D(0, 1, 0), _world.Items[i].YRotation)));
             itemTransform.Children.Add(new ScaleTransform3D(_world.Items[i].Scale, _world.Items[i].Scale, _world.Items[i].Scale));
             itemTransform.Children.Add(new TranslateTransform3D(_world.Items[i].Position - _world.Origin));
             _itemsList[i].Transform = itemTransform;
         };
         var snowmanTransform = new Transform3DGroup();
+        snowmanTransform.Children.Add(new RotateTransform3D(new AxisAngleRotation3D(new Vector3D(0, 1, 0), _world.Snowman.YRotation)));
         snowmanTransform.Children.Add(new ScaleTransform3D(_world.Snowman.Scale, _world.Snowman.Scale, _world.Snowman.Scale));
         snowmanTransform.Children.Add(new TranslateTransform3D(_world.Snowman.Position - _world.Origin));
         _snowmanGroup.Transform = snowmanTransform;

@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using System.Windows.Media.Media3D;
 
 namespace Wpf3dDemo.Entities;
-public record struct Cylinder : IItem3D
+public record class Cylinder : IItem3D
 {
     public Point3D Position { get; set; }
 
     public double Scale => 1;
+
+    public double YRotation => 0;
 
     public double Radius { get; init; }
 
