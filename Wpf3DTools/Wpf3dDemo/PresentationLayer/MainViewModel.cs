@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -9,7 +10,7 @@ using Wpf3dTools.Factories;
 using Wpf3dTools.Interfaces;
 
 namespace Wpf3dDemo.PresentationLayer;
-public class MainViewModel
+public class MainViewModel:ObservableObject
 {
     private readonly IWorld _world;
     private readonly ISphericalCameraController _cameraController;
