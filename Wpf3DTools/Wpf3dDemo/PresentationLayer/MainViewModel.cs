@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -61,11 +62,19 @@ public class MainViewModel : ObservableObject
         }
     }
 
+    public IRelayCommand<KeyEventArgs> ControlByKeyCommand { get; private set; }
+    public IRelayCommand<MouseWheelEventArgs> ZoomCommand { get; private set; }
+    public IRelayCommand<Vector> ControlByMouseCommand { get; private set; }
+
     public MainViewModel(IWorld world, ISphericalCameraController cameraController, IShapesFactory shapesFactory)
     {
         _world = world;
         _cameraController = cameraController;
         _shapesFactory = shapesFactory;
+
+        ControlByKeyCommand = new RelayCommand<KeyEventArgs>(ProcessKey);
+        ZoomCommand = new RelayCommand<MouseWheelEventArgs> (ZoomByMouse);
+        ControlByMouseCommand = new RelayCommand<Vector>(ControlByMouse);
 
         Init3DPresentation();
         InitItemGeometries();
@@ -81,7 +90,7 @@ public class MainViewModel : ObservableObject
         }
     }
 
-    private void UpdateWorldDisplay()
+   private void UpdateWorldDisplay()
     {
         for (int i = 0; i < _itemsList.Count; i++)
         {
@@ -209,17 +218,17 @@ public class MainViewModel : ObservableObject
         _cameraController.PositionCamera(radius, Math.PI / 10, 2.0 * Math.PI / 5);
     }
 
-    public void ProcessKey(Key key)
+    private void ProcessKey(KeyEventArgs? args)
     {
-        _cameraController.ControlByKey(key);
+       _cameraController.ControlByKey(args!.Key);
     }
 
-    public void Zoom(int delta)
+    private void ZoomByMouse(MouseWheelEventArgs? args)
     {
-        _cameraController.Zoom(delta);
+        _cameraController.Zoom(args!.Delta);
     }
-
-    public void ControlByMouse(Vector vector)
+    
+    private void ControlByMouse(Vector vector)
     {
         _cameraController.ControlByMouse(vector);
     }

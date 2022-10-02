@@ -3,9 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:behaviours="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:Wpf3dDemo.PresentationLayer"
-        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=local:MainViewModel}"  
+        mc:Ignorable="d"        
         Title="Wpf3DTools Demo" Height="450" Width="845">
+    <behaviours:Interaction.Triggers>
+        <behaviours:EventTrigger EventName="KeyDown">
+            <behaviours:InvokeCommandAction Command="{Binding ControlByKeyCommand}" PassEventArgsToCommand="True"/>
+        </behaviours:EventTrigger>
+    </behaviours:Interaction.Triggers>
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
     </Window.Resources>
@@ -19,11 +26,16 @@
                 <Label Background="Green" Foreground="Yellow" Height="25" Width="30" HorizontalContentAlignment="Center" >Y</Label>
                 <Label Background="Blue" Foreground="Yellow" Height="25" Width="30" HorizontalContentAlignment="Center" >Z</Label>
             </StackPanel>
-            
-            <Button DockPanel.Dock="Right" Width="130" HorizontalAlignment="Right"  Margin="15,5" >Move</Button>           
+
+            <Button DockPanel.Dock="Right" Width="130" HorizontalAlignment="Right"  Margin="15,5" >Move</Button>
         </DockPanel>
         <Border x:Name="viewPortControl" Margin="10" BorderThickness="1" BorderBrush="Black" Background="White"
-                    MouseDown="ViewPortMouseDown" PreviewMouseWheel="ViewPortPreviewMouseWheel"  >
+                    MouseDown="ViewPortMouseDown" >
+            <behaviours:Interaction.Triggers>
+                <behaviours:EventTrigger EventName="PreviewMouseWheel">
+                    <behaviours:InvokeCommandAction Command="{Binding ZoomCommand}" PassEventArgsToCommand="True"/>
+                </behaviours:EventTrigger>
+            </behaviours:Interaction.Triggers>
             <Viewport3D x:Name="mainViewPort" Camera="{Binding Camera}" >
                 <ModelVisual3D x:Name ="visual3D" Content="{Binding Visual3dContent}" />
             </Viewport3D>

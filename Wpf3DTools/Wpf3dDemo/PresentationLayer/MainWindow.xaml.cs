@@ -19,16 +19,6 @@ public partial class MainWindow : Window
 
     #region camera control
 
-    private void WindowKeyDown(object sender, KeyEventArgs e)
-    {
-        _viewModel.ProcessKey(e.Key);
-    }
-
-    private void ViewPortPreviewMouseWheel(object sender, MouseWheelEventArgs e)
-    {
-        _viewModel.Zoom(e.Delta);
-    }
-
     private void ViewPortMouseDown(object sender, MouseButtonEventArgs e)
     {
         _lastPoint = e.GetPosition(mainViewPort);
@@ -41,7 +31,7 @@ public partial class MainWindow : Window
     {
         var newPoint = e.GetPosition(mainViewPort);
         var vector = newPoint - _lastPoint;
-        _viewModel.ControlByMouse(vector);
+        _viewModel.ControlByMouseCommand.Execute(vector);
         _lastPoint = newPoint;
     }
 
