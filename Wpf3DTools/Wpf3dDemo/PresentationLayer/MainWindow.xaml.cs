@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using Wpf3dDemo.LogicLayer;
 
 namespace Wpf3dDemo.PresentationLayer;
 /// <summary>
@@ -9,7 +8,7 @@ namespace Wpf3dDemo.PresentationLayer;
 public partial class MainWindow : Window
 {
 
-    private readonly MainViewModel _viewModel; 
+    private readonly MainViewModel _viewModel;
     private Point _lastPoint;
     public MainWindow(MainViewModel viewModel)
     {

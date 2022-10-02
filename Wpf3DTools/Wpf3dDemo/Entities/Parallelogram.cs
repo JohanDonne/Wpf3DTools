@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Media3D;
+﻿using System.Windows.Media.Media3D;
 
 namespace Wpf3dDemo.Entities;
 public record class Parallelogram : IItem3D
@@ -18,9 +13,9 @@ public record class Parallelogram : IItem3D
     public Vector3D Side2 { get; }
 
     public Parallelogram(Point3D origin, Vector3D side1, Vector3D side2, double scale = 1)
-    { 
+    {
         Position = origin;
-        Side1 = side1;  
+        Side1 = side1;
         Side2 = side2;
         Scale = scale;
     }

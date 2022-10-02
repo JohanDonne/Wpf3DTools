@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media.Media3D;
 
 namespace Wpf3dTools.Implementation;
@@ -8,18 +6,18 @@ public static class Extensions3D
 {
     #region general utils
 
-    public static Point3D Round(this Point3D point, int decimals = 3)
+    internal static Point3D Round(this Point3D point, int decimals = 3)
     {
         double x = Math.Round(point.X, decimals);
         double y = Math.Round(point.Y, decimals);
         double z = Math.Round(point.Z, decimals);
         return new Point3D(x, y, z);
     }
-    
+
     // Find the intersection of a plane and a line.
     // The line is given by point linePt and vector v.
     // The plane is given by point planePt and normal vector n.
-    public static Point3D IntersectPlaneLine(Point3D linePt, Vector3D v,
+    internal static Point3D IntersectPlaneLine(Point3D linePt, Vector3D v,
         Point3D planePt, Vector3D n)
     {
         // Get the equation for the plane.
@@ -46,7 +44,7 @@ public static class Extensions3D
     // If the point is already in the dictionary, return its index in the mesh.
     // If the point isn't in the dictionary, create it in the mesh and add its
     // index to the dictionary.
-    public static int PointIndex(this MeshGeometry3D mesh, Point3D point, Dictionary<Point3D, int> pointDict)
+    internal static int PointIndex(this MeshGeometry3D mesh, Point3D point, Dictionary<Point3D, int> pointDict)
     {
         // See if the point already exists.
         if ((pointDict != null) && pointDict.ContainsKey(point))
@@ -66,7 +64,7 @@ public static class Extensions3D
     // If the point is already in the dictionary, return its index in the mesh.
     // If the point isn't in the dictionary, create it and its texture coordinates
     // in the mesh and add its index to the dictionary.
-    public static int PointIndex(this MeshGeometry3D mesh, Point3D point, Point textureCoord, Dictionary<Point3D, int> pointDict)
+    internal static int PointIndex(this MeshGeometry3D mesh, Point3D point, Point textureCoord, Dictionary<Point3D, int> pointDict)
     {
         // See if the point already exists.
         if (pointDict.ContainsKey(point))
@@ -90,8 +88,7 @@ public static class Extensions3D
     #region Polygon
 
     // Make points to define a regular polygon.
-    public static Point3D[] MakePolygonPoints(int numSides,
-        Point3D center, Vector3D vx, Vector3D vy)
+    internal static Point3D[] MakePolygonPoints(int numSides, Point3D center, Vector3D vx, Vector3D vy)
     {
         // Generate the points.
         var points = new Point3D[numSides];
@@ -107,14 +104,11 @@ public static class Extensions3D
 
     // Add a polygon with points stored in an array.
     // Texture coordinates are optional.
-    public static void AddPolygon(this MeshGeometry3D mesh,
-        Point3D[] points, Point[]? textureCoords = null)
+    internal static void AddPolygon(this MeshGeometry3D mesh, Point3D[] points, Point[]? textureCoords = null)
     {
         mesh.AddPolygon(points, null, textureCoords);
     }
-    public static void AddPolygon(this MeshGeometry3D mesh,
-        Point3D[] points, Dictionary<Point3D, int>? pointDict = null,
-        Point[]? textureCoords = null)
+    internal static void AddPolygon(this MeshGeometry3D mesh, Point3D[] points, Dictionary<Point3D, int>? pointDict = null, Point[]? textureCoords = null)
     {
         pointDict ??= new Dictionary<Point3D, int>();
 
@@ -154,22 +148,17 @@ public static class Extensions3D
 
     // Add a polygon with a variable argument list of points
     // and no texture coordinates.
-    public static void AddPolygon(this MeshGeometry3D mesh,
-        Dictionary<Point3D, int>? pointDict = null,
-        params Point3D[] points)
+    internal static void AddPolygon(this MeshGeometry3D mesh, Dictionary<Point3D, int>? pointDict = null, params Point3D[] points)
     {
         mesh.AddPolygon(points, pointDict, null);
     }
-    public static void AddPolygon(this MeshGeometry3D mesh,
-        params Point3D[] points)
+    internal static void AddPolygon(this MeshGeometry3D mesh, params Point3D[] points)
     {
         mesh.AddPolygon(points, null);
     }
 
     // Add a regular polygon with optional texture coordinates.
-    public static void AddRegularPolygon(this MeshGeometry3D mesh,
-        int numSides, Point3D center, Vector3D vx, Vector3D vy,
-        Point[]? textureCoords = null)
+    internal static void AddRegularPolygon(this MeshGeometry3D mesh, int numSides, Point3D center, Vector3D vx, Vector3D vy, Point[]? textureCoords = null)
     {
         // Generate the points.
         var points = MakePolygonPoints(numSides, center, vx, vy);

@@ -1,21 +1,19 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 using Wpf3dDemo.Domain;
 using Wpf3dDemo.Entities;
-using Wpf3dTools.Factories;
 using Wpf3dTools.Interfaces;
 
 namespace Wpf3dDemo.PresentationLayer;
-public class MainViewModel:ObservableObject
+public class MainViewModel : ObservableObject
 {
     private readonly IWorld _world;
     private readonly ISphericalCameraController _cameraController;
     private readonly IShapesFactory _shapesFactory;
-    
+
     private readonly Color[] _colorList = new Color[]
        {
             Colors.MediumBlue,
@@ -68,7 +66,7 @@ public class MainViewModel:ObservableObject
         _world = world;
         _cameraController = cameraController;
         _shapesFactory = shapesFactory;
-        
+
         Init3DPresentation();
         InitItemGeometries();
         _ = Animate();
@@ -116,11 +114,11 @@ public class MainViewModel:ObservableObject
                 // add rectangles with backface culling (no backMaterials parameter used)
                 Parallelogram rect => _shapesFactory.CreateParallelogram(rect.Side1, rect.Side2, GetMaterial(5)),
                 // show circles without backface culling (by providing a backMaterials parameter).
-                Circle circle => _shapesFactory.CreateCircle(normal:  circle.Normal, materials: GetMaterial(6), backMaterials: GetMaterial(7)),
+                Circle circle => _shapesFactory.CreateCircle(normal: circle.Normal, materials: GetMaterial(6), backMaterials: GetMaterial(7)),
                 _ => throw new ArgumentException("Unknown type of a item"),
-                };
+            };
             _itemsList.Add(geometry);
-            _itemsGroup.Children.Add(geometry);            
+            _itemsGroup.Children.Add(geometry);
         }
         _model3dGroup.Children.Add(_itemsGroup);
         CreateSnowman();
@@ -140,12 +138,12 @@ public class MainViewModel:ObservableObject
         var hat = new GeometryModel3D(hatMesh, GetMaterial(Colors.LightSlateGray));
         var hatTransform = new Transform3DGroup();
         hatTransform.Children.Add(new RotateTransform3D(new AxisAngleRotation3D(new Vector3D(-1, 0, 0), 20)));
-        hatTransform.Children.Add(new TranslateTransform3D(new Vector3D(0,220,-10)));
-        hat.Transform =hatTransform;
+        hatTransform.Children.Add(new TranslateTransform3D(new Vector3D(0, 220, -10)));
+        hat.Transform = hatTransform;
         _snowmanGroup.Children.Add(hat);
 
         var nose = _shapesFactory.CreateCone(4, new(0, 0, 30), GetMaterial(Colors.Orange));
-        nose.Transform = new TranslateTransform3D(new(0,190,50));
+        nose.Transform = new TranslateTransform3D(new(0, 190, 50));
         _snowmanGroup.Children.Add(nose);
 
         var coalMesh = new MeshGeometry3D();

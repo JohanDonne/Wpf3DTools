@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Media3D;
+﻿using System.Windows.Media.Media3D;
 
 namespace Wpf3dDemo.Entities;
-public record class Cone: IItem3D
+public record class Cone : IItem3D
 {
     public Point3D Position { get; set; }
 
