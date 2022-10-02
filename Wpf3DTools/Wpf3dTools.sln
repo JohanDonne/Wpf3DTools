@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wpf3dTools", "Wpf3dTools\Wp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wpf3dDemo", "Wpf3dDemo\Wpf3dDemo.csproj", "{DC536734-3F45-4F3A-8709-85488C88A95C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Documentation", "Documentation\Documentation.csproj", "{B3B863C4-BF5C-421D-8711-EA66EAD68109}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,9 @@ Global
 		{DC536734-3F45-4F3A-8709-85488C88A95C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC536734-3F45-4F3A-8709-85488C88A95C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC536734-3F45-4F3A-8709-85488C88A95C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3B863C4-BF5C-421D-8711-EA66EAD68109}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3B863C4-BF5C-421D-8711-EA66EAD68109}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3B863C4-BF5C-421D-8711-EA66EAD68109}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
