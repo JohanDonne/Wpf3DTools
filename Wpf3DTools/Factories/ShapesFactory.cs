@@ -7,37 +7,41 @@ using Wpf3dTools.Interfaces;
 namespace Wpf3dTools.Factories;
 public class ShapesFactory : IShapesFactory
 {
+    // derived from original code by Rod Stephens
+    // see: Wpf3D, isbn 9781983905964 
+    // and https://github.com/WriterRod/WPF-3d-source
+
     #region Cubes
 
     public GeometryModel3D CreateCube(MaterialGroup materials)
     {
         var mesh = new MeshGeometry3D();
-        AddCubeToMesh(mesh, new Point3D(), 1.0, 1.0, 1.0);
+        AddCubeToMesh(mesh, new Point3D(), 1.0);
         var geo = new GeometryModel3D(mesh, materials);
         return geo;
     }
 
-    public GeometryModel3D CreateCube(Point3D center, double xSize, double ySize, double zSize, MaterialGroup materials)
+    public GeometryModel3D CreateCube(Point3D center, double size, MaterialGroup materials)
     {
         var mesh = new MeshGeometry3D();
-        AddCubeToMesh(mesh, center, xSize, ySize, zSize);
+        AddCubeToMesh(mesh, center, size);
         var geo = new GeometryModel3D(mesh, materials);
         return geo;
     }
 
-    public void AddCubeToMesh(MeshGeometry3D mesh, Point3D center, double xSize, double ySize, double zSize)
+    public void AddCubeToMesh(MeshGeometry3D mesh, Point3D center, double size)
     {
         Point3D[] points =
                 {
-                           center + new Vector3D(-xSize/2,-ySize/2,+zSize/2),  //1
-                           center + new Vector3D(-xSize/2,+ySize/2,+zSize/2),  //2
-                           center + new Vector3D(+xSize/2,+ySize/2,+zSize/2),  //3
-                           center + new Vector3D(+xSize/2,-ySize/2,+zSize/2),  //4
+                           center + new Vector3D(-size/2,-size/2,+size/2),  //1
+                           center + new Vector3D(-size/2,+size/2,+size/2),  //2
+                           center + new Vector3D(+size/2,+size/2,+size/2),  //3
+                           center + new Vector3D(+size/2,-size/2,+size/2),  //4
 
-                           center + new Vector3D(-xSize/2,+ySize/2,-zSize/2),  //5
-                           center + new Vector3D(-xSize/2,-ySize/2,-zSize/2),  //6
-                           center + new Vector3D(+xSize/2,+ySize/2,-zSize/2),  //7
-                           center + new Vector3D(+xSize/2,-ySize/2,-zSize/2),  //8                           
+                           center + new Vector3D(-size/2,+size/2,-size/2),  //5
+                           center + new Vector3D(-size/2,-size/2,-size/2),  //6
+                           center + new Vector3D(+size/2,+size/2,-size/2),  //7
+                           center + new Vector3D(+size/2,-size/2,-size/2),  //8                           
                     };
         var triangles = new (int, int, int)[]
         {
@@ -63,36 +67,36 @@ public class ShapesFactory : IShapesFactory
     #region Spheres
 
     // create a unity sphere around the origin as a GeormetryModel3D 
-    public GeometryModel3D CreateSphere(MaterialGroup materials, int numTheta = 72, int numPhi = 72)
+    public GeometryModel3D CreateSphere(MaterialGroup materials, int steps = 72)
     {
         var mesh = new MeshGeometry3D();
-        AddSphereToMesh(mesh, new Point3D(0, 0, 0), 1, numTheta, numPhi);
+        AddSphereToMesh(mesh, new Point3D(0, 0, 0), 1, steps);
         var geo = new GeometryModel3D(mesh, materials);
         return geo;
     }
 
-    public GeometryModel3D CreateSphere(Point3D center, double radius, MaterialGroup materials, int numTheta = 72, int numPhi = 72)
+    public GeometryModel3D CreateSphere(Point3D center, double radius, MaterialGroup materials, int steps = 72)
     {
         var mesh = new MeshGeometry3D();
-        AddSphereToMesh(mesh, center, radius, numTheta, numPhi);
+        AddSphereToMesh(mesh, center, radius, steps);
         var geo = new GeometryModel3D(mesh, materials);
         return geo;
     }
 
     // Add a sphere to an existing MeshGeometry3D
-    public void AddSphereToMesh(MeshGeometry3D mesh, Point3D center, double radius, int numTheta = 72, int numPhi = 72)
+    public void AddSphereToMesh(MeshGeometry3D mesh, Point3D center, double radius, int steps = 72)
     {
         // Make a point dictionary if needed.
         var pointDict = new Dictionary<Point3D, int>();
 
         // Generate the points.
-        double dtheta = 2 * Math.PI / numTheta;
-        double dphi = Math.PI / numPhi;
+        double dtheta = 2 * Math.PI / steps;
+        double dphi = Math.PI / steps;
         double theta = 0;
-        for (int t = 0; t < numTheta; t++)
+        for (int t = 0; t < steps; t++)
         {
             double phi = 0;
-            for (int p = 0; p < numPhi; p++)
+            for (int p = 0; p < steps; p++)
             {
                 // Find this piece's points.
                 Point3D[] points =
@@ -246,7 +250,7 @@ public class ShapesFactory : IShapesFactory
     }
 
     // Add a Cone defined by a centerpoint, radius and axis
-    public void AddConeToMesh(MeshGeometry3D mesh, Point3D origin, double radius, Vector3D axis, int numSides = 72, bool smoothSides = false)
+    public void AddConeToMesh(MeshGeometry3D mesh, Point3D origin, double radius, Vector3D axis, int numSides = 72, bool smoothSides = true)
     {
         var apex = origin + axis;
 
@@ -381,10 +385,10 @@ public class ShapesFactory : IShapesFactory
         return geo;
     }
 
-    public GeometryModel3D CreateCircle(Vector3D normal, MaterialGroup materials, MaterialGroup? backMaterials = null, int numTheta = 72, Point[]? textureCoords = null)
+    public GeometryModel3D CreateCircle(Vector3D normal, MaterialGroup materials, MaterialGroup? backMaterials = null, int steps = 72, Point[]? textureCoords = null)
     {
         var mesh = new MeshGeometry3D();
-        AddCircleToMesh(mesh, new Point3D(), 1, normal, numTheta, textureCoords);
+        AddCircleToMesh(mesh, new Point3D(), 1, normal, steps, textureCoords);
         var geo = new GeometryModel3D(mesh, materials)
         {
             BackMaterial = backMaterials
@@ -403,10 +407,10 @@ public class ShapesFactory : IShapesFactory
         return geo;
     }
 
-    public GeometryModel3D CreateRegularPolygon(int numSides, Vector3D vx, Vector3D vy, MaterialGroup materials, MaterialGroup? backMaterials = null, Point[]? textureCoords = null)
+    public GeometryModel3D CreateRegularPolygon(int numSides, Vector3D normal, MaterialGroup materials, MaterialGroup? backMaterials = null, Point[]? textureCoords = null)
     {
         var mesh = new MeshGeometry3D();
-        AddRegularPolygonToMesh(mesh, numSides, new Point3D(), vx, vy, textureCoords);
+        AddRegularPolygonToMesh(mesh, numSides, new Point3D(),1.0, normal, textureCoords);
         var geo = new GeometryModel3D(mesh, materials)
         {
             BackMaterial = backMaterials
@@ -468,27 +472,27 @@ public class ShapesFactory : IShapesFactory
 
     // add a cricle from center, radius & normalvector
     public void AddCircleToMesh(MeshGeometry3D mesh, Point3D center, double radius, Vector3D normal, int numTheta = 72, Point[]? textureCoords = null)
+    {   
+        AddRegularPolygonToMesh(mesh, numTheta, center, radius, normal, textureCoords);
+    }
+
+    // Add a regular polygon with optional texture coordinates.
+    public void AddRegularPolygonToMesh(MeshGeometry3D mesh, int numSides, Point3D center, double size,  Vector3D normal, Point[]? textureCoords = null)
     {
         var vx = Vector3D.CrossProduct(normal, new Vector3D(1, 0, 0));
         if (vx == new Vector3D()) vx = Vector3D.CrossProduct(normal, new Vector3D(0, 0, 1));
         vx.Normalize();
-        vx *= radius;
+        vx *= size;
         var vy = Vector3D.CrossProduct(normal, new Vector3D(0, 1, 0));
         if (vy == new Vector3D()) vy = Vector3D.CrossProduct(normal, new Vector3D(0, 0, 1));
         vy.Normalize();
-        vy *= radius;
-        AddRegularPolygonToMesh(mesh, numTheta, center, vx, vy, textureCoords);
-    }
-
-    // Add a regular polygon with optional texture coordinates.
-    public void AddRegularPolygonToMesh(MeshGeometry3D mesh, int numSides, Point3D center, Vector3D vx, Vector3D vy, Point[]? textureCoords = null)
-    {
+        vy *= size;
         // Generate the points.
         var points = MakePolygonPoints(numSides, center, vx, vy);
         // Make the polygon.
         mesh.AddPolygon(points, textureCoords);
     }
-
+    
     // Make points to define a regular polygon.
     private static Point3D[] MakePolygonPoints(int numSides, Point3D center, Vector3D vx, Vector3D vy)
     {

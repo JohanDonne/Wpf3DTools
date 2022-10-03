@@ -9,6 +9,7 @@ namespace Wpf3dTools.Implementation
     {
         // derived from SphericalCameraController by Rod Stephens
         // see: Wpf3D, isbn 9781983905964
+        // and https://github.com/WriterRod/WPF-3d-source
 
         // The camera.
         public PerspectiveCamera Camera { get; } = new PerspectiveCamera();
@@ -28,7 +29,7 @@ namespace Wpf3dTools.Implementation
         public Point3D SphericalCoordinates
         {
             get => new(_cameraR, _cameraTheta, _cameraPhi);
-            set
+            private set
             {
                 _cameraR = value.X;
                 _cameraTheta = value.Y;
@@ -43,7 +44,7 @@ namespace Wpf3dTools.Implementation
                 SphericalToCartesian(_cameraR, _cameraTheta, _cameraPhi, out double x, out double y, out double z);
                 return new Point3D(x, y, z);
             }
-            set
+            private set
             {
                 CartesianToSpherical(value.X, value.Y, value.Z, out double r, out double theta, out double phi);
                 _cameraR = r;

@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wpf3dTools", "Wpf3dTools\Wp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wpf3dDemo", "Wpf3dDemo\Wpf3dDemo.csproj", "{DC536734-3F45-4F3A-8709-85488C88A95C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Documentation", "Documentation\Documentation.csproj", "{B3B863C4-BF5C-421D-8711-EA66EAD68109}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Documentation", "Documentation\Documentation.csproj", "{B3B863C4-BF5C-421D-8711-EA66EAD68109}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{971809AD-1338-4D11-8C10-D5135F559C66}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -2,7 +2,7 @@
 using System.Windows.Media.Media3D;
 
 namespace Wpf3dTools.Implementation;
-public static class Extensions3D
+internal  static class Extensions3D
 {
     #region general utils
 
