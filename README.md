@@ -17,8 +17,8 @@ Documentation:
 
 [Getting Started](Documentation/GettingStarted.md)    
 [The Spherical Camera Controller](Documentation/SphericalCameraController.md)    
-[Creating basig geometrical shapes: The ShapesFactory](Documentation/ShapesFactory)    
-[Using Wpf3dTools with DependencyInjection](Documentation/DependencyInjection)    
+[Creating basig geometrical shapes: The ShapesFactory](Documentation/ShapesFactory.md)    
+[Using Wpf3dTools with DependencyInjection](Documentation/DependencyInjection.md)    
 
 
 The sample application contained in this repository demonstrates the use of this library and the animation of shapes by manipulation of their associated transformations.
