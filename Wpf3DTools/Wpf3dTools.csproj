@@ -7,7 +7,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Small WPF 3D utility Library</Title>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <Authors>Johan Donné</Authors>
     <Description>A small WPF 3D utility library providing basic geometric shape construction and a camera controller </Description>
     <Copyright>© Johan Donné - 2022</Copyright>
