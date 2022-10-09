@@ -1,0 +1,43 @@
+﻿<Window x:Class="Demo04_Movement.Presentation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Demo04_Movement.Presentation"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=local:MainViewModel, IsDesignTimeCreatable=True}"    
+        Title="{Binding Title}"
+        Height="600" Width="1000">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+    </Window.Resources>
+    <DockPanel LastChildFill="True" Background="AliceBlue">
+        <DockPanel DockPanel.Dock="Top" Height="40"  >
+            <CheckBox Name="OrthoCheckBox" DockPanel.Dock="Left"  Margin="10,10,20,5" >
+                Show OrthoCam
+            </CheckBox>
+            <CheckBox Name="AxesCheckBox" DockPanel.Dock="Left"  Margin="10,10,20,5" IsChecked="{Binding ShowAxes, Mode=TwoWay}">
+                Show Axes
+            </CheckBox>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Visibility="{Binding ElementName=AxesCheckBox,Path=IsChecked, Converter={StaticResource BoolToVisibility}}" >
+                <Label Background="Red" Foreground="Yellow" Height="25" Width="30" HorizontalContentAlignment="Center" >X</Label>
+                <Label Background="Green" Foreground="Yellow" Height="25" Width="30" HorizontalContentAlignment="Center" >Y</Label>
+                <Label Background="Blue" Foreground="Yellow" Height="25" Width="30" HorizontalContentAlignment="Center" >Z</Label>
+            </StackPanel>
+            <Button DockPanel.Dock="Right" Width="130" HorizontalAlignment="Right"  Margin="15,5,25,5" Command="{Binding StartCommand}">Start</Button>
+            <Button DockPanel.Dock="Right" Width="130" HorizontalAlignment="Right"  Margin="15,5" Command="{Binding StopCommand}">Stop</Button>
+        </DockPanel>
+        <Border DockPanel.Dock="Right" BorderThickness="1" BorderBrush="Gray" Margin="5" Background="Beige"
+                CornerRadius="5" Width="400" Height="350" VerticalAlignment="Top" 
+                Visibility="{Binding ElementName=OrthoCheckBox,Path=IsChecked, Converter={StaticResource BoolToVisibility}}">
+            <Viewport3D  Camera="{Binding OrthoCamera}" Margin="15" >
+                <ModelVisual3D Content="{Binding Visual3dContent}" />
+            </Viewport3D>
+        </Border>
+        <Border x:Name="viewportControl" BorderThickness="1" BorderBrush="Gray" Margin="5" Background="Beige" CornerRadius="5">
+            <Viewport3D x:Name="mainViewport" Camera="{Binding Camera}" Margin="15">
+                <ModelVisual3D Content="{Binding Visual3dContent}" />
+            </Viewport3D>
+        </Border>
+    </DockPanel>
+</Window>

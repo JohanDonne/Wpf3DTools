@@ -1,0 +1,7 @@
+﻿<Application x:Class="Demo05_Import_Models.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Demo05_Import_Models" >
+    <Application.Resources>
+    </Application.Resources>
+</Application>

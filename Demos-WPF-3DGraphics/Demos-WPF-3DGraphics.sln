@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo01-Minimal", "Demo01-Minimal\Demo01-Minimal.csproj", "{8109D6A0-5107-4B37-ADC6-982BF67A2BCE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{01CDFFF2-39B1-472C-8494-DCD3F898719A}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo02-Cameras-Textures", "Demo02-Cameras-Textures\Demo02-Cameras-Textures.csproj", "{188C7D08-EF4B-46F2-A688-F43CD101A2C7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo03-Transforms", "Demo03-Transforms\Demo03-Transforms.csproj", "{608EAC4E-9C63-4BDF-9B77-F9D25D497E2F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo04-Movement", "Demo04-Movement\Demo04-Movement.csproj", "{C4F9AA93-2FFE-48AA-8919-A0090E3ED809}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo05-Import-Models", "Demo05-Import-Models\Demo05-Import-Models.csproj", "{767A87D1-AB43-476C-A403-967813A02A1B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8109D6A0-5107-4B37-ADC6-982BF67A2BCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8109D6A0-5107-4B37-ADC6-982BF67A2BCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8109D6A0-5107-4B37-ADC6-982BF67A2BCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8109D6A0-5107-4B37-ADC6-982BF67A2BCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{188C7D08-EF4B-46F2-A688-F43CD101A2C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{188C7D08-EF4B-46F2-A688-F43CD101A2C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{188C7D08-EF4B-46F2-A688-F43CD101A2C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{188C7D08-EF4B-46F2-A688-F43CD101A2C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{608EAC4E-9C63-4BDF-9B77-F9D25D497E2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{608EAC4E-9C63-4BDF-9B77-F9D25D497E2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{608EAC4E-9C63-4BDF-9B77-F9D25D497E2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{608EAC4E-9C63-4BDF-9B77-F9D25D497E2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4F9AA93-2FFE-48AA-8919-A0090E3ED809}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4F9AA93-2FFE-48AA-8919-A0090E3ED809}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4F9AA93-2FFE-48AA-8919-A0090E3ED809}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4F9AA93-2FFE-48AA-8919-A0090E3ED809}.Release|Any CPU.Build.0 = Release|Any CPU
+		{767A87D1-AB43-476C-A403-967813A02A1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{767A87D1-AB43-476C-A403-967813A02A1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{767A87D1-AB43-476C-A403-967813A02A1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{767A87D1-AB43-476C-A403-967813A02A1B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4FC0EC7B-4CAB-4908-A6FC-02C3D0FBFB8A}
+	EndGlobalSection
+EndGlobal
